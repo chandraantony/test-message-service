@@ -48,16 +48,21 @@ async function getAllData() {
 } 
 
 async function bulkUpdate() {
-    const data = await SmsInfo.find()
-    data.splice(0,900)
-     console.log(data.length)
-    data.forEach(async element => {
-       const smsStatus = await checkSMS(element.message_id)
-       var status = smsStatus.status
-       while (status ) {
-           
-       }
-    });
+    try {
+        const data = await SmsInfo.find()
+        data.splice(0,900)
+        await Promise.all(data.map(async (element) => {
+            do {
+                var msgInfo = await messageHelper.checkSMS(element.id)
+                element.status = msgInfo.status
+            } while (element.status === 'ACCEPTD');
+            let newData = await SmsInfo.update({message_id : element.id},element)
+            console.log(newData)
+        }))
+    } catch (error) {
+        console.log(error)
+    }
+
 }
 
 bulkUpdate()
