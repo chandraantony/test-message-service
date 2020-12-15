@@ -5,6 +5,7 @@ const moment = require('moment')
 const messageHelper = require('./src/helpers/message');
 
 const Schedule = require('./src/models/schedule');
+const SmsInfo = require('./src/models/smsInfo');
 const mongoose = require('mongoose')
 
 mongoose.connect(`mongodb://${process.env.DB_HOST}/${process.env.DB_NAME}`, {
@@ -13,12 +14,12 @@ mongoose.connect(`mongodb://${process.env.DB_HOST}/${process.env.DB_NAME}`, {
 });
 
 function testJOB(){
-    try {
+        console.log('Job Is Starting')
         var job = new CronJob(`* * * * *`, async function() {
         var arr = []
         var date = '2012151815'
         const data = await Schedule.find({running_time : date})
-        console.log(`Total Message Will Send at ${moment().format('YYYY MM DD HH:mm')} is ${data.length}`)
+        console.log(`Total Schedule Will Send at ${moment().format('YYYY MM DD HH:mm')} is ${data.length}`)
         await Promise.all(data.map(async (element) => {
             var messageStatus = await messageHelper.sendSMS(element.list_recipient.toString())
             if(Array.isArray(messageStatus)){
@@ -39,19 +40,17 @@ function testJOB(){
                 })
             } 
         }))
-        SmsInfo.insertMany(arr), function (err,doc){
+        SmsInfo.insertMany(arr,(err,doc) => {
             if(err){
                 console.log(err)
             }else{
-                console.log(doc)
+                console.log({
+                    sms_sended : doc
+                })
             }
-        }
-        console.log(arr)
+        })
         });
         job.start(); 
-    } catch (error) {
-        console.log(error)
-    }
 
 }
 testJOB()
