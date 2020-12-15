@@ -6,9 +6,27 @@ const compression = require('compression')
 const cors = require('cors');
 const path = require('path');
 const fs = require('fs');
+const mongoose = require('mongoose');
+
+require('dotenv').config(); 
+console.log(process.env.DB_NAME)
+mongoose.connect(`mongodb://${process.env.DB_HOST}/${process.env.DB_NAME}`, {
+  useNewUrlParser: true, 
+  useUnifiedTopology: true
+});
+console.log(mongoose.connection.readyState);
+
+let db = mongoose.connection;
+
+db.once('open', function(){
+  console.log('connected')
+})
+
+db.on('error', function(err){
+  return err
+})
 
 
-require('dotenv').config();
 
 const handlers = require('./handlers');
 const api = require('./api');

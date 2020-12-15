@@ -1,6 +1,7 @@
 const express = require('express');
 
-const message = require('./message')
+const schedule = require('./schedule')
+const sms = require('./sms')
 
 const router = express.Router();
 
@@ -9,7 +10,7 @@ router.get('/', (req, res) => {
     message: 'HELLO'
   });
 });
-
-router.use('/message', message);
+router.use('/schedule', schedule);
+router.use('/sms', sms);
 
 module.exports = router;
