@@ -52,6 +52,7 @@ exports.countData = (time,status) => {
       }
     return promise
     .then((doc) => {
+        console.log(doc)
         return doc
     }).catch((err) => {
         return err

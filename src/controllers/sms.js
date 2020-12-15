@@ -26,7 +26,7 @@ exports.getSms = async (req,res) => {
 
         }else{
             const data = await repoSms.getSms(perPage,page,usersProjection,time,status);
-            const totalData = await repoSms.countData();
+            const totalData = await repoSms.countData(time,status);
             res.json({
                 data : data,
                 total_row : data.length,

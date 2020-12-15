@@ -12,15 +12,20 @@ mongoose.connect(`mongodb://${process.env.DB_HOST}/${process.env.DB_NAME}`, {
 async function checkSmsAndUpdate() {
     try {
         const data = await SmsInfo.find()
-        data.splice(0,900)
+        console.log(data)
         await Promise.all(data.map(async (element) => {
             do {
                 var msgInfo = await messageHelper.checkSMS(element.id)
-                element.status = msgInfo.status
             } while (element.status === 'ACCEPTD');
-            let newData = await SmsInfo.update({message_id : element.id},element)
-            console.log(newData)
+            await SmsInfo.findOneAndUpdate({message_id : element.message_id},{ $set: { status: element.status } }, {"new": true}, (error, doc) => {
+                if(error){
+                    console.log(error)
+                }else{
+                    console.log(doc)
+                }
+              });
         }))
+        
     } catch (error) {
         console.log(error)
     }
