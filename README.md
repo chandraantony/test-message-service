@@ -31,19 +31,19 @@ npm run dev
 To Seed data 100 data/seed
 
 ```
-node seedSchedule
+node seedSchedule.js
 ```
 
 ## Running Job Send SMS
 
 
 ```
-node sendSms
+node sendSms.js
 ```
 
 ## Running Job Checking SMS
 
 
 ```
-node checkSms
+node checkSms.js
 ```
