@@ -1,7 +1,8 @@
 # Intro
 
-Having mongo installed localy, and create database called smsService
-here the link of postan [collection](https://www.getpostman.com/collections/a43ec84890287e96547a)
+Having mongo installed localy, and create database called smsService.
+
+Here is the link of postman [collection](https://www.getpostman.com/collections/a43ec84890287e96547a)
 
 ## Setup
 
