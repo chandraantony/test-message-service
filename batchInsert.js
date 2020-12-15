@@ -23,6 +23,7 @@ async function getAllData() {
             messageStatus.forEach(msgElement => {
                 arr.push({
                     schedule_id : element._id,
+                    delivery_time : element.running_time,
                     message_id : msgElement.message_id,
                     status : null
                 })
@@ -31,6 +32,7 @@ async function getAllData() {
         }else{
             arr.push({
                 schedule_id : element._id,
+                delivery_time : element.running_time,
                 message_id : messageStatus.message_id,
                 status : null
             })

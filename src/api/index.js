@@ -3,6 +3,8 @@ const express = require('express');
 const schedule = require('./schedule')
 const sms = require('./sms')
 
+const Schedule = require('../models/schedule')
+
 const router = express.Router();
 
 router.get('/', (req, res) => {

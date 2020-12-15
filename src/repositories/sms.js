@@ -3,9 +3,9 @@ const Sms = require('../models/smsInfo')
 exports.getSms = (perPage,page,usersProjection,time,status) => {
     let promise;
     if ( time != undefined && time != null && time != "" && status != null && status != undefined && status != "") {
-        promise =  Sms.find({status :status, running_time :time},usersProjection).limit(perPage).skip(perPage * page).exec() 
+        promise =  Sms.find({status :status, delivery_time :time},usersProjection).limit(perPage).skip(perPage * page).exec() 
     } else if  ( time != undefined && time != null && time != "" ) {
-        promise =  Sms.find({running_time : time},usersProjection).limit(perPage).skip(perPage * page).exec() 
+        promise =  Sms.find({delivery_time : time},usersProjection).limit(perPage).skip(perPage * page).exec() 
     } else if  ( status != null && status != undefined && status != "" ) {
         promise =  Sms.find({status : status},usersProjection).limit(perPage).skip(perPage * page).exec() 
     } else {
@@ -23,9 +23,9 @@ exports.getSms = (perPage,page,usersProjection,time,status) => {
 exports.getAllSms = (usersProjection,time,status) => {
     let promise;
     if ( time != undefined && time != null && time != "" && status != null && status != undefined && status != "") {
-        promise =  Sms.find({status :status, running_time :time},usersProjection).exec() 
+        promise =  Sms.find({status :status, delivery_time :time},usersProjection).exec() 
       } else if  ( time != undefined && time != null && time != "" ) {
-        promise =  Sms.find({running_time : time},usersProjection).exec() 
+        promise =  Sms.find({delivery_time : time},usersProjection).exec() 
       } else if  ( status != null && status != undefined && status != "" ) {
         promise =  Sms.find({status : status},usersProjection).exec() 
       } else {
@@ -42,9 +42,9 @@ exports.getAllSms = (usersProjection,time,status) => {
 exports.countData = (time,status) => {
     let promise;
     if ( time != undefined && time != null && time != "" && status != null && status != undefined && status != "") {
-        promise =  Sms.find({status :status, running_time :time}).countDocuments().exec()  
+        promise =  Sms.find({status :status, delivery_time :time}).countDocuments().exec()  
       } else if  ( time != undefined && time != null && time != "" ) {
-        promise =  Sms.find({running_time : time}).countDocuments().exec() 
+        promise =  Sms.find({delivery_time : time}).countDocuments().exec() 
       } else if  ( status != null && status != undefined && status != "" ) {
         promise =  Sms.find({status : status}).countDocuments().exec()  
       } else {
