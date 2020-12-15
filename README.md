@@ -36,7 +36,6 @@ node seedSchedule
 
 ## Running Job Send SMS
 
-To Seed data 100 data/seed
 
 ```
 node sendSms
@@ -44,7 +43,6 @@ node sendSms
 
 ## Running Job Checking SMS
 
-To Seed data 100 data/seed
 
 ```
 node checkSms
