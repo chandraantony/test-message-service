@@ -17,7 +17,7 @@ function testJOB(){
         console.log('Job Is Starting')
         var job = new CronJob(`* * * * *`, async function() {
         var arr = []
-        var date = moment().format('YYYYMMDDHHmm')
+        var date = moment().format('YYMMDDHHmm')
         const data = await Schedule.find({running_time : date})
         console.log(`Total Schedule Will Send at ${moment().format('YYYY MM DD HH:mm')} is ${data.length}`)
         await Promise.all(data.map(async (element) => {
